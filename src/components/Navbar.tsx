@@ -123,7 +123,8 @@ export const Navbar = () => {
             >
               Dashboard
             </Link> */}
-            <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
+            {!localStorage.getItem('user') ? <>
+              <Link to="/auth" onClick={() => setMobileMenuOpen(false)}>
               <Button variant="outline" className="w-full">
                 Sign In
               </Button>
@@ -132,7 +133,17 @@ export const Navbar = () => {
               <Button className="w-full bg-primary hover:bg-primary/90">
                 Get Started
               </Button>
-            </Link>
+            </Link></> : <div className="w-[200px]">
+                <Button
+                  onClick={()=>{localStorage.removeItem('user')
+                    navigate('/auth')
+                  }}
+                  variant="outline"
+                  className="w-full bg-primary hover:bg-primary/90"
+                >
+                  LogOut
+                </Button>
+              </div>}
           </div>
         </div>
       )}
